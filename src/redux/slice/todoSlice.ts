@@ -53,4 +53,5 @@ export const todoSlice = createSlice({
   },
 });
 
-export const {getTodoList, postTodo} = todoSlice.actions;
+export const {getTodoList, postTodo, updateTodo, deleteTodo} =
+  todoSlice.actions;
