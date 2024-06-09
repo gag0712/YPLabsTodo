@@ -22,7 +22,7 @@ export type CustomModalRef = {
 };
 
 const Dialog = () => {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const modalRef = useRef<CustomModalRef>();
   const [data, setData] = useState<OpenDialogProps>();
   const [todoContent, setTodoContent] = useState('');

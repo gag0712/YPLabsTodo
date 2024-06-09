@@ -2,7 +2,7 @@ import {MutableRefObject} from 'react';
 import {OpenDialogProps} from './Dialog';
 
 export type CustomModalRef = {
-  show: (obj: OpenDialogProps) => void;
+  show: (obj?: OpenDialogProps) => void;
   hide: () => void;
 };
 
@@ -12,7 +12,7 @@ export default class DialogController {
     this.modalRef = ref;
   };
 
-  static showDialog = (obj: OpenDialogProps) => {
+  static showDialog = (obj?: OpenDialogProps) => {
     this.modalRef.current?.show(obj);
   };
 
