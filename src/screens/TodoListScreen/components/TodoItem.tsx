@@ -58,5 +58,6 @@ export const TodoItem = ({item}: TTodoItemProps) => {
     isDone: isDone,
     toggleDone: toggleDone,
   };
+
   return <TodoItemView {...props} />;
 };

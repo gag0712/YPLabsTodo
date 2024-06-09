@@ -1,51 +1,30 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-  useWindowDimensions,
-} from 'react-native';
-import {borderRadius, color, fontSize, gap} from '../../../constants/style';
-import {TTodo} from '../../../constants/types';
-import {useState} from 'react';
-import {Toggle} from '../../../components/Toggle';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {borderRadius, color, fontSize, gap} from '../../constants/style';
+import {TTodo} from '../../constants/types';
+import {Toggle} from '../../components/Toggle';
 
-type TTodoItemViewProps = {
-  item: TTodo;
-  onPressItem: () => void;
+type TTodoDetailScreenViewProp = {
+  item: TTodo | undefined;
   onPressDelete: () => void;
   onPressEdit: () => void;
   isDone: boolean;
   toggleDone: () => void;
 };
 
-export const TodoItemView = ({
+export const TodoDetailScreenView = ({
   item,
-  onPressItem,
   onPressDelete,
   onPressEdit,
   isDone,
   toggleDone,
-}: TTodoItemViewProps) => {
-  const window = useWindowDimensions();
-  const width = window.width - gap.large * 2 - gap.medium * 4;
-  const [buttonContainerWidth, setButtonContainerWidth] = useState(0);
+}: TTodoDetailScreenViewProp) => {
+  if (!item) {
+    return <View style={styles.container} />;
+  }
 
   return (
-    <Pressable style={styles.container} onPress={onPressItem}>
-      <View style={{width: width - buttonContainerWidth}}>
-        <Text
-          numberOfLines={5}
-          ellipsizeMode="tail"
-          style={[styles.contentText, isDone && styles.doneText]}>
-          {item.content}
-        </Text>
-      </View>
-      <View
-        style={styles.buttonContainer}
-        onLayout={event => {
-          setButtonContainerWidth(event.nativeEvent.layout.width);
-        }}>
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
         <Toggle value={isDone} toggle={toggleDone} />
         <Pressable onPress={onPressDelete} style={styles.buttonDelete}>
           <Text>삭제</Text>
@@ -54,21 +33,29 @@ export const TodoItemView = ({
           <Text style={styles.textEdit}>수정</Text>
         </Pressable>
       </View>
-    </Pressable>
+      <View style={styles.contentContainer}>
+        <Text
+          numberOfLines={5}
+          ellipsizeMode="tail"
+          style={[styles.contentText, isDone && styles.doneText]}>
+          {item.content}
+        </Text>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: borderRadius,
-    paddingVertical: gap.small,
-    paddingHorizontal: gap.medium,
-    flexDirection: 'row',
     flex: 1,
+    backgroundColor: color.background.primary,
+    padding: gap.large,
+    gap: gap.large,
+  },
+  contentContainer: {
     backgroundColor: color.background.secondary,
-    alignItems: 'center',
-    minHeight: 48,
-    justifyContent: 'space-between',
+    borderRadius: borderRadius,
+    padding: gap.large,
   },
   contentText: {
     fontSize: fontSize.large,
