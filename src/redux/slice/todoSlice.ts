@@ -50,8 +50,11 @@ export const todoSlice = createSlice({
       state.todoList = [];
       API.deleteTodo(action.payload);
     },
+    refetchTodo: (state, action: {payload: undefined}) => {
+      state.todoList = [];
+    },
   },
 });
 
-export const {getTodoList, postTodo, updateTodo, deleteTodo} =
+export const {getTodoList, postTodo, updateTodo, deleteTodo, refetchTodo} =
   todoSlice.actions;

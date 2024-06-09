@@ -19,9 +19,11 @@ export function* fetchTodo() {
 }
 
 export function* fetchTodoSaga() {
-  const {getTodoList, postTodo, updateTodo, deleteTodo} = todoSlice.actions;
+  const {getTodoList, postTodo, updateTodo, deleteTodo, refetchTodo} =
+    todoSlice.actions;
   yield takeEvery(getTodoList, fetchTodo);
   yield takeEvery(postTodo, fetchTodo);
   yield takeEvery(updateTodo, fetchTodo);
   yield takeEvery(deleteTodo, fetchTodo);
+  yield takeEvery(refetchTodo, fetchTodo);
 }

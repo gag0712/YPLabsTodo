@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../../redux/store';
 import {useEffect} from 'react';
-import {getTodoList} from '../../redux/slice/todoSlice';
+import {getTodoList, refetchTodo} from '../../redux/slice/todoSlice';
 import {TodoListScreenView} from './TodoListScreenView';
 import {showDialog} from '../../components/DialogController';
 
@@ -12,6 +12,10 @@ export const TodoListScreen = () => {
 
   const fetchTodoList = () => {
     dispatch(getTodoList());
+  };
+
+  const refetchTodoList = () => {
+    dispatch(refetchTodo());
   };
 
   const onPressAdd = () => {
@@ -27,6 +31,7 @@ export const TodoListScreen = () => {
     onPressAdd: onPressAdd,
     onEndReached: fetchTodoList,
     isLoading: isLoading,
+    refetchTodo: refetchTodoList,
   };
 
   return <TodoListScreenView {...props} />;

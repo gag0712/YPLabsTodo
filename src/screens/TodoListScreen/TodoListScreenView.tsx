@@ -16,6 +16,7 @@ type TTodoListScreenViewProps = {
   onPressAdd: () => void;
   onEndReached: () => void;
   isLoading: boolean;
+  refetchTodo: () => void;
 };
 
 export const TodoListScreenView = ({
@@ -23,6 +24,7 @@ export const TodoListScreenView = ({
   onPressAdd,
   onEndReached,
   isLoading,
+  refetchTodo,
 }: TTodoListScreenViewProps) => {
   return (
     <SafeAreaView edges={['bottom', 'left', 'right']} style={styles.container}>
@@ -30,7 +32,7 @@ export const TodoListScreenView = ({
         refreshControl={
           <RefreshControl
             refreshing={isLoading}
-            onRefresh={onEndReached}
+            onRefresh={refetchTodo}
             tintColor={color.text.primary}
           />
         }
