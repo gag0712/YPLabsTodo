@@ -8,6 +8,8 @@ import {
 } from 'react';
 import ModalController from './DialogController';
 import {DialogView} from './DialogView';
+import {useDispatch} from 'react-redux';
+import {postTodo} from '../redux/slice/todoSlice';
 
 export type OpenDialogProps =
   | {
@@ -27,6 +29,7 @@ const Dialog = () => {
   const [data, setData] = useState<OpenDialogProps>();
   const [todoContent, setTodoContent] = useState('');
   const [todoId, setTodoId] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (data) {
@@ -66,7 +69,7 @@ const Dialog = () => {
       // update todo
       return;
     }
-    // post todo
+    dispatch(postTodo(todoContent));
   };
 
   const props = {
