@@ -1,4 +1,11 @@
-import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {TTodo} from '../../constants/types';
 import {borderRadius, color, fontSize, gap} from '../../constants/style';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -8,16 +15,25 @@ type TTodoListScreenViewProps = {
   todoList: TTodo[];
   onPressAdd: () => void;
   onEndReached: () => void;
+  isLoading: boolean;
 };
 
 export const TodoListScreenView = ({
   todoList,
   onPressAdd,
   onEndReached,
+  isLoading,
 }: TTodoListScreenViewProps) => {
   return (
     <SafeAreaView edges={['bottom', 'left', 'right']} style={styles.container}>
       <FlatList
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading}
+            onRefresh={onEndReached}
+            tintColor={color.text.primary}
+          />
+        }
         data={todoList}
         contentContainerStyle={styles.flatListContentContainer}
         renderItem={({item}) => <TodoItem item={item} />}

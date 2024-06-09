@@ -7,6 +7,7 @@ import {showDialog} from '../../components/DialogController';
 
 export const TodoListScreen = () => {
   const todoList = useSelector((state: RootState) => state.todoList);
+  const isLoading = useSelector((state: RootState) => state.isLoading);
   const dispatch = useAppDispatch();
 
   const fetchTodoList = () => {
@@ -25,6 +26,7 @@ export const TodoListScreen = () => {
     todoList: todoList,
     onPressAdd: onPressAdd,
     onEndReached: fetchTodoList,
+    isLoading: isLoading,
   };
 
   return <TodoListScreenView {...props} />;

@@ -24,7 +24,7 @@ export const todoSlice = createSlice({
   initialState: initialState,
   reducers: {
     getTodoListSuccess: (state, action: {payload: TTodo[]}) => {
-      state.isLoading = true;
+      state.isLoading = false;
       const length = Math.floor(state.todoList.length / 10);
       const paginationState = action.payload
         .reverse()
@@ -36,7 +36,7 @@ export const todoSlice = createSlice({
       state.error = error;
     },
     getTodoList: (state, action: {payload: undefined}) => {
-      state.isLoading = false;
+      state.isLoading = true;
     },
     postTodo: (state, action: {payload: string}) => {
       state.todoList = [];
