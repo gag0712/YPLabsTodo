@@ -1,5 +1,5 @@
 import {Pressable, StyleSheet, View} from 'react-native';
-import {color} from '../../../constants/style';
+import {color} from '../constants/style';
 
 type TTogleProps = {
   value: boolean;
