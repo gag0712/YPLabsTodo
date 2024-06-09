@@ -1,10 +1,16 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {TTodo} from '../../constants/types';
+import {API} from '../../services/todo';
 
 type TInitialState = {
   todoList: TTodo[];
   isLoading: boolean;
   error: string | null;
+};
+
+type TUpdateTodoParam = {
+  id: number;
+  content: string;
 };
 
 export const initialState: TInitialState = {
@@ -19,8 +25,11 @@ export const todoSlice = createSlice({
   reducers: {
     getTodoListSuccess: (state, action: {payload: TTodo[]}) => {
       state.isLoading = true;
-      const newState = state.todoList.concat(action.payload);
-      state.todoList = newState;
+      const length = Math.floor(state.todoList.length / 10);
+      const paginationState = action.payload
+        .reverse()
+        .slice(0, (length + 1) * 10);
+      state.todoList = paginationState;
     },
     getTodoListFailure: (state, {payload: error}) => {
       state.isLoading = false;
@@ -29,7 +38,19 @@ export const todoSlice = createSlice({
     getTodoList: (state, action: {payload: undefined}) => {
       state.isLoading = false;
     },
+    postTodo: (state, action: {payload: string}) => {
+      state.todoList = [];
+      API.postTodo(action.payload);
+    },
+    updateTodo: (state, action: {payload: TUpdateTodoParam}) => {
+      state.todoList = [];
+      API.updateTodo(action.payload.id, action.payload.content);
+    },
+    deleteTodo: (state, action: {payload: number}) => {
+      state.todoList = [];
+      API.deleteTodo(action.payload);
+    },
   },
 });
 
-export const {getTodoList} = todoSlice.actions;
+export const {getTodoList, postTodo} = todoSlice.actions;

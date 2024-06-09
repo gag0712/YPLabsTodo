@@ -1,12 +1,12 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {getTodoList} from '../../services/todo';
+import {API} from '../../services/todo';
 import {TTodo} from '../../constants/types';
 import {isAxiosError} from 'axios';
 import {todoSlice} from '../slice/todoSlice';
 
 export function* fetchTodo() {
   try {
-    const todoList: TTodo[] = yield call(getTodoList);
+    const todoList: TTodo[] = yield call(API.getTodoList);
     const {getTodoListSuccess} = todoSlice.actions;
     yield put(getTodoListSuccess(todoList));
   } catch (e) {
@@ -17,7 +17,10 @@ export function* fetchTodo() {
   }
 }
 
-export function* todoSaga() {
-  const {getTodoList} = todoSlice.actions;
+export function* fetchTodoSaga() {
+  const {getTodoList, postTodo, updateTodo, deleteTodo} = todoSlice.actions;
   yield takeEvery(getTodoList, fetchTodo);
+  yield takeEvery(postTodo, fetchTodo);
+  yield takeEvery(updateTodo, fetchTodo);
+  yield takeEvery(deleteTodo, fetchTodo);
 }
