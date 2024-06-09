@@ -1,27 +1,27 @@
 import {Pressable, Text, View} from 'react-native';
 import {useSelector} from 'react-redux';
 import {RootState, useAppDispatch} from '../redux/store';
-import {decremented, incremented} from '../redux/slice';
+import {showDialog} from '../components/DialogController';
+import {useEffect} from 'react';
+import {getTodoList} from '../redux/slice/todoSlice';
 
 export const TodoListScreen = () => {
-  const counterState = useSelector((state: RootState) => state.counter);
+  const todoState = useSelector((state: RootState) => state.todoList);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getTodoList());
+  }, []);
 
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Todo List Screen{counterState}</Text>
+      <Text>Todo List Screen{}</Text>
       <Text></Text>
       <Pressable
         onPress={() => {
-          dispatch(incremented());
+          showDialog();
         }}>
-        <Text>+</Text>
-      </Pressable>
-      <Pressable
-        onPress={() => {
-          dispatch(decremented());
-        }}>
-        <Text>-</Text>
+        <Text>show</Text>
       </Pressable>
     </View>
   );
