@@ -6,7 +6,7 @@ import {todoSlice} from '../slice/todoSlice';
 
 export function* fetchTodo() {
   try {
-    delay(500);
+    delay(800);
     const todoList: TTodo[] = yield call(API.getTodoList);
     const {getTodoListSuccess} = todoSlice.actions;
     yield put(getTodoListSuccess(todoList));
