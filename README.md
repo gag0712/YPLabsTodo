@@ -1,8 +1,19 @@
+# 환경 설정, 실행 방법, 주의사항
+
+react-native 최신 버전 0.74로 만들어서 0.72이하를 사용하신다면 jdk 11 -> jdk 17, classic yarn -> yarn berry로 바꾸셔야할 수도 있습니다
+그 외에 명령어 들은 기본과 같습니다
+
+# challenging
+
+전체적으로 redux saga를 이해하고 적용하는게 큰 도전 과제였습니다
+기본적인 generator 패턴을 모르고 있지 않았지만 2일 반 정도의 시간에 redux saga를 터득하기에 제 실력이 부족하네요
+fetchTodoSaga 하나 밖에 존재 하지 않는데 todoSlice에서 다른 api들은 실행하게끔 코드를 짰는데 이렇게 하는 방식이 saga의 컨셉과 맞지 않는 것 같습니다
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
 
